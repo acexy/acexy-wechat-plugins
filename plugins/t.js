@@ -5,13 +5,13 @@
  */
 
 const program = require('../lib/commandBulider');
-const http = require('../lib/httpRequest');
+const httpRequest = require('../lib/httpRequest');
 const md5 = require('md5');
 
 const apiUrl = 'http://api.fanyi.baidu.com/api/trans/vip/translate';
 
-program.version("1.0.1");
-program.command("t <word>", "使用百度翻译引擎翻译用户指定的内容为英文。 word: 需要翻译的内容", async function (word) {
+program.version("1.0.0");
+program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: t 你好", async function (word) {
 
     let urlParams = "?q=" + encodeURI(word);
 
@@ -29,13 +29,14 @@ program.command("t <word>", "使用百度翻译引擎翻译用户指定的内容
         timeout: 5000
     };
 
-    return http.doRequest(requestParam);
+    var response = await httpRequest.doRequest(requestParam);
+    if (response.flag) {
+        return JSON.parse(response.body).trans_result[0].dst;
+    } else {
+        return "请求百度翻译失败了🥣";
+    }
 });
 
 module.exports.exec = async reqData => {
-    var response = await program.exec(reqData.req.splitContent);
-    if (response.flag) {
-        return JSON.parse(response.body).trans_result[0].dst;
-    }
-    return "翻译失败";
+    return await program.exec(reqData.req.splitContent);
 };
