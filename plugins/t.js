@@ -4,7 +4,9 @@
  * @Description: 百度翻译api
  */
 
-const program = require('../lib/commandBulider');
+const commandBuilder = require('../lib/commandBuilder');
+const program = new commandBuilder();
+
 const httpRequest = require('../lib/httpRequest');
 const md5 = require('md5');
 

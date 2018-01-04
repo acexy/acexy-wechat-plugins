@@ -3,7 +3,8 @@
  * 18/1/4
  * @Description: 时间相关的处理模块
  */
-const program = require('../lib/commandBulider');
+const commandBuilder = require('../lib/commandBuilder');
+const program = new commandBuilder();
 
 /**
  * 将普通时间转化为时间戳
