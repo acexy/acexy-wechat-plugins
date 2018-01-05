@@ -13,5 +13,5 @@ program.command("md5 <content>", "将输入的数据进行md5加密 例如: md5 
 });
 
 module.exports.exec = async reqData => {
-    return await program.exec(reqData.req.splitContent);
+    return await program.exec(reqData.request.args);
 };
