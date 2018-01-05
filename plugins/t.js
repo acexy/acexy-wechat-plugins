@@ -10,7 +10,7 @@ const program = new commandBuilder();
 const httpRequest = require('../lib/httpRequest');
 const md5 = require('md5');
 
-const apiUrl = 'http://api.fanyi.baidu.com/api/trans/vip/translate';
+const apiUrl = global.config.httpApiUrl.baiduTranslateApi;
 
 program.version("1.0.0");
 program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: t 你好", async function (word) {
