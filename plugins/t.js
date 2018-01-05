@@ -40,5 +40,5 @@ program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: 
 });
 
 module.exports.exec = async reqData => {
-    return await program.exec(reqData.req.splitContent);
+    return await program.exec(reqData.request.args);
 };
