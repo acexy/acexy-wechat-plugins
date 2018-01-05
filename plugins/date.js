@@ -32,5 +32,5 @@ program.command("date ut2ct <timestamp>", "将时间戳转换为普通时间(yyy
 });
 
 module.exports.exec = async reqData => {
-    return await program.exec(reqData.req.splitContent);
+    return await program.exec(reqData.request.args);
 };
