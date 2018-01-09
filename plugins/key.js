@@ -33,7 +33,7 @@ program.command("key set <key> <value>", "创建/更新关键字检索信息 例
 /**
  * 模糊查询自己创建的关键字信息
  */
-program.command("key find <key>", "模糊查询自己创建的关键字信息 例如: key find 帐号", async function (key, openId) {
+program.command("key find <key>", "模糊查询自己创建的关键字信息 例如: key find jquery", async function (key, openId) {
     var response = await mysqlPool.exec(SQL.keySetFindKey, [openId, key]);
     if (response.flag) {
         var list = response.data;
