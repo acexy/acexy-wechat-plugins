@@ -39,7 +39,7 @@ program.command("key find <key>", "模糊查询自己创建的关键字信息 �
         var list = response.data;
         var content = '';
         for (var index in list) {
-            content += (index + 1) + "、[" + + list[index].keyword + "] : " + list[index].information + "\n";
+            content += (index + 1) + "、[" + list[index].keyword + "] : " + list[index].information + "\n";
         }
         return content;
     }
