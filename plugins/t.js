@@ -11,19 +11,19 @@ const httpRequest = require('../lib/httpRequest');
 const md5 = require('md5');
 
 const apiUrl = global.config.httpApiUrl.baiduTranslateApi;
+const appId = global.config.baiduTranslateApi.appid;
+const secretKey = global.config.baiduTranslateApi.secretKey;
 
 program.version("1.0.0");
 program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: t 你好", async function (word) {
 
     let urlParams = "?q=" + encodeURI(word);
-
     let salt = new Date().getTime();
-    let appid = global.config.baiduTranslateApi.appid;
 
     urlParams += "&from=auto&to=auto";
-    urlParams += "&appid=" + appid;
+    urlParams += "&appid=" + appId;
     urlParams += "&salt=" + salt;
-    urlParams += "&sign=" + md5(appid + word + salt + global.config.baiduTranslateApi.secretKey);
+    urlParams += "&sign=" + md5(appid + word + salt + secretKey);
 
     let requestParam = {
         uri: apiUrl + urlParams,
