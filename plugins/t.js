@@ -23,7 +23,7 @@ program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: 
     urlParams += "&from=auto&to=auto";
     urlParams += "&appid=" + appId;
     urlParams += "&salt=" + salt;
-    urlParams += "&sign=" + md5(appid + word + salt + secretKey);
+    urlParams += "&sign=" + md5(appId + word + salt + secretKey);
 
     let requestParam = {
         uri: apiUrl + urlParams,
