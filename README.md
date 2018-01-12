@@ -8,8 +8,7 @@
 ```
 1. 这是一个插件库，用于为【Acexy开发者工具】提供命令插件
 2. 开发环境
-     > NodeJs v8.9.3
-     > JavaScript ECMAScript 6
+     > node v7.6.0 or higher for ES2015 and async function support.
 ```
 ---
 > ## 参与贡献插件
