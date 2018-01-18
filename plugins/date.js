@@ -9,7 +9,7 @@ const program = new commandBuilder();
 /**
  * 将普通时间转化为时间戳
  */
-program.command("date ct2ut <time>", "将输入的时间(yyyy/MM/dd HH:mm:ss.SSS)转换为时间戳 例如: date ct2ut 2018/01/01", async function (time) {
+program.command("date ct2ut <time>", "将输入的时间(yyyy/MM/dd HH:mm:ss.SSS)转换为时间戳 例如: date ct2ut \"2018/01/01\"", async function (time) {
     let date = new Date(time);
     let timestamp = date.getTime();
     if (isNaN(timestamp)) {
