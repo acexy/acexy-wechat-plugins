@@ -36,6 +36,9 @@ program.command("key find <key>", "模糊查询自己创建的关键字信息 �
     var response = await mysqlPool.exec(SQL.keyFindKey, [openId, key]);
     if (response.flag) {
         var list = response.data;
+        if (!list || list.length == 0) {
+            return "关键字 " + key + " 未能检索到任何内容";
+        }
         var content = '';
         for (var index in list) {
             content += (Number(index) + 1) + "、[" + list[index].keyword + "] : " + list[index].information + "\n";
