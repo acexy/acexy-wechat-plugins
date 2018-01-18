@@ -15,7 +15,7 @@ const appId = global.config.baiduTranslateApi.appid;
 const secretKey = global.config.baiduTranslateApi.secretKey;
 
 program.version("1.0.0");
-program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: t 你好", async function (word) {
+program.command("t <word>", "使用百度翻译引擎翻译指定内容 例如: t \"hello world\"", async function (word) {
 
     let urlParams = "?q=" + encodeURI(word);
     let salt = new Date().getTime();
