@@ -9,7 +9,7 @@ const program = new commandBuilder();
 
 const md5 = require('md5');
 
-program.command("md5 <content>", "将输入的数据进行md5加密 例如: md5 12345678", async function (content) {
+program.command("md5 en <content>", "将输入的数据进行md5加密 例如: md5 en 12345678", async function (content) {
     return md5(content);
 });
 
