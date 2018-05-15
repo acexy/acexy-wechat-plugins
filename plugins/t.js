@@ -24,6 +24,7 @@ program.version("1.0.0");
 program.command("t <word>", "使用Google翻译引擎翻译指定内容 例如: t \"hello world\"", async function (word) {
 
     // 判断当前输入内容是中文或英文 sl: 翻译原内容语言类型 tl: 翻译后目标语言类型
+    word = extend(word);
 
     let tl = 'zh-CN';
     let tk = googleTranslateTk.tk(word);
@@ -77,14 +78,16 @@ program.command("t <word>", "使用Google翻译引擎翻译指定内容 例如: 
 
 program.command("t b <word>", "使用百度翻译引擎翻译指定内容 例如: t b \"hello world\"", async function (word) {
 
-    let urlParams = "?q=" + encodeURI(word);
+    word = extend(word);
+    let urlParams = "?from=auto&to=auto";
     let salt = new Date().getTime();
 
-    urlParams += "&from=auto&to=auto";
     urlParams += "&appid=" + baiduAppId;
     urlParams += "&salt=" + salt;
     urlParams += "&sign=" + md5(baiduAppId + word + salt + baiduSecretKey);
+    urlParams += "&q=" + encodeURI(word);
 
+    console.log(baiduApiUrl + urlParams)
     let requestParam = {
         uri: baiduApiUrl + urlParams,
         method: "get",
@@ -92,6 +95,7 @@ program.command("t b <word>", "使用百度翻译引擎翻译指定内容 例如
     };
 
     let response = await httpRequest.doRequest(requestParam);
+    console.log(response)
     if (response.flag) {
         return JSON.parse(response.body).trans_result[0].dst;
     } else {
@@ -116,5 +120,9 @@ const isInputCN = (word) => {
 
 module.exports.exec = async reqData => {
     return await program.exec(reqData.request.args);
+};
+
+const extend = (word) => {
+    return word.replace("&", " ");
 };
 
