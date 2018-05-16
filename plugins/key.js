@@ -14,7 +14,7 @@ program.command("key set <key> <value>", "创建/更新关键字检索信息 例
     if (response.flag) {
         if (response.data[0].count == 0) {
             // 历史未创建
-            response = await mysqlPool.exec(SQL.keyInsert, [new Date(), openId, key, value]);
+            response = await mysqlPool.exec(SQL.keyInsert, [openId, key, value]);
             if (response.flag) {
                 return "关键字 " + key + " 创建完成, 可通过 key find " + key + " 查询";
             }
