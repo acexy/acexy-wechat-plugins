@@ -6,6 +6,7 @@
 const commandBuilder = require('../lib/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
 const program = new commandBuilder();
+const util = require('util');
 
 const SQL = global.config.sql;
 
@@ -33,7 +34,8 @@ program.command("key set <key> <value>", "创建/更新关键字检索信息 例
  * 模糊查询自己创建的关键字信息
  */
 program.command("key find <key>", "模糊查询自己创建的关键字Key信息 例如: key find jquery", async function (key, openId) {
-    var response = await mysqlPool.exec(SQL.keyFindKey, [openId, key]);
+    let sql = util.format(SQL.keyFindKey, openId, mysqlPool.escape('%' + key + '%'));
+    var response = await mysqlPool.exec(sql);
     if (response.flag) {
         var list = response.data;
         if (!list || list.length == 0) {
@@ -49,7 +51,8 @@ program.command("key find <key>", "模糊查询自己创建的关键字Key信息
 });
 
 program.command("key findv <value>", "模糊查询自己创建的关键字Value信息 例如: key findv 框架", async function (value, openId) {
-    var response = await mysqlPool.exec(SQL.keyFindValue, [openId, value]);
+    let sql = util.format(SQL.keyFindValue, openId, mysqlPool.escape('%' + value + '%'));
+    var response = await mysqlPool.exec(sql);
     if (response.flag) {
         var list = response.data;
         if (!list || list.length == 0) {
