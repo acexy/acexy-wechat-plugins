@@ -123,6 +123,7 @@ module.exports.exec = async reqData => {
 };
 
 const extend = (word) => {
-    return word.replace("&", " ");
+    word = word.replace("&", " ");
+    return word;
 };
 
