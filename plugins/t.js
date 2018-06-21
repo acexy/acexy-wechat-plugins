@@ -87,7 +87,6 @@ program.command("t b <word>", "使用百度翻译引擎翻译指定内容 例如
     urlParams += "&sign=" + md5(baiduAppId + word + salt + baiduSecretKey);
     urlParams += "&q=" + encodeURI(word);
 
-    console.log(baiduApiUrl + urlParams)
     let requestParam = {
         uri: baiduApiUrl + urlParams,
         method: "get",
@@ -95,7 +94,6 @@ program.command("t b <word>", "使用百度翻译引擎翻译指定内容 例如
     };
 
     let response = await httpRequest.doRequest(requestParam);
-    console.log(response)
     if (response.flag) {
         return JSON.parse(response.body).trans_result[0].dst;
     } else {
