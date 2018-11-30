@@ -64,7 +64,15 @@ program.command("t <content>", "使用Google翻译引擎翻译指定内容 例�
                 };
                 response = await httpRequest.doRequest(requestParam);
                 if (response.flag) {
-                    return JSON.parse(response.body)[0][0][0];
+
+                    let ts = JSON.parse(response.body).data[0];
+                    let tString = '';
+
+                    for (let i in ts) {
+                        tString += ts[i][0] + '\t';
+                    }
+
+                    return tString;
                 } else {
                     return "请求Google翻译失败了🥣";
                 }
