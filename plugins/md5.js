@@ -19,7 +19,7 @@ program.command("md5 de <cipher>", "进行md5密文匹配反查原文 例如: md
         method: "get",
         timeout: 5000
     };
-    var response = await httpRequest.doRequest(requestParam);
+    let response = await httpRequest.doRequest(requestParam);
     if (response.flag) {
         response = JSON.parse(response.body);
         if (response.flag == 1) {
