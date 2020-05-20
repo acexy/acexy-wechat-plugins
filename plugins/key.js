@@ -11,9 +11,9 @@ const util = require('util');
 const SQL = global.config.sql;
 
 program.command("key set <key> <value>", "创建/更新关键字检索信息 例如: key set jquery jQuery是一个快速、简洁的JavaScript框架", async function (key, value, openId) {
-    var response = await mysqlPool.exec(SQL.keyCount, [key, openId]);
+    let response = await mysqlPool.exec(SQL.keyCount, [key, openId]);
     if (response.flag) {
-        if (response.data[0].count == 0) {
+        if (response.data[0].count === 0) {
             // 历史未创建
             response = await mysqlPool.exec(SQL.keyInsert, [openId, key, value]);
             if (response.flag) {
