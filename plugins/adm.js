@@ -6,7 +6,6 @@
 const commandBuilder = require('../lib/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
 const program = new commandBuilder();
-const util = require('util');
 
 const SQL = global.config.sql;
 
