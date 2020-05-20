@@ -19,7 +19,7 @@ program.command("date ct2ut <time>", "将输入的时间(yyyy/MM/dd HH:mm:ss.SSS
 });
 
 program.command("date ut2ct <timestamp>", "将时间戳转换为普通时间(yyyy/MM/dd HH:mm:ss) 例如: date ut2ct 1484150400000", async function (timestamp) {
-    var time = Number(timestamp);
+    let time = Number(timestamp);
     if (isNaN(time)) {
         return timestamp + " 不是有效的时间戳";
     }
