@@ -43,7 +43,7 @@ program.command("ebic bindSubAppid <env> <subMchId> <subAppId>", '为子商户�
     return await doRequest(wxpay, reqData);
 });
 
-program.command("ebic addPayUrl <env> <subMchId> <payUrl>", '为子商户号绑定subAppId \n 例如: ebic bindSubAppid test 3333333 https://pay.com/' +
+program.command("ebic addPayUrl <env> <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebic bindSubAppid test 3333333 https://pay.com/' +
     ' \n 参数说明 \n\t env[执行环境]: test = 测试环境; prd-online = 生产线上环境; prd-offline = 生产线下环境', async function (env, subMchId, payUrl) {
 
     if (env != 'test' && env != 'prd-online' && env != 'prd-offline') {
