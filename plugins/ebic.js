@@ -75,6 +75,7 @@ program.command("ebic addPayUrl <env> <subMchId> <payUrl>", '为子商户号添�
 const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
     response = await xmlJson.xml2Json(response);
+    console.log(response)
     if (response.xml.return_code == 'SUCCESS' && response.xml.result_code == 'SUCCESS') {
         return '操作成功';
     } else {
