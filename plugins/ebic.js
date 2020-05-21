@@ -1,7 +1,7 @@
 /**
  * @Author:acexy@thankjava.com
  *
- * @Description: 电银的一些辅助命令
+ * @Description: 电银的一些辅助命令 测试环境
  */
 
 const commandBuilder = require('../lib/commandBuilder');

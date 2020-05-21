@@ -20,8 +20,8 @@ program.command("adm addPubCmd <cmd>", "增加一个公开命令权限 例如: a
 /**
  * 模糊查询自己创建的关键字信息
  */
-program.command("adm addPriCmd <cmd> <openId>", "为openId设置命令访问权限 例如: adm addPriCmd key xxxxxxx", async function (cmd, openId) {
-    let response = await mysqlPool.exec(SQL.addPriCmd, [cmd, openId]);
+program.command("adm addPriCmd <cmd> <openId> <remark>", "为openId设置命令访问权限 例如: adm addPriCmd key xxxxxxx 测试", async function (cmd, openId, remark) {
+    let response = await mysqlPool.exec(SQL.addPriCmd, [cmd, openId, remark]);
     if (response.flag) {
         return "已成功设置权限命令 " + cmd;
     }
