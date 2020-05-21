@@ -17,10 +17,9 @@ program.version("1.0.0");
 program.command("ebicPrd bindSubAppid <env> <subMchId> <subAppId>", '为子商户号绑定subAppId \n 例如: ebicPrd bindSubAppid online 3333333 wxwxwxwxx' +
     ' \n 参数说明 \n\t env[执行环境]: online = 线上环境; offline = 线下环境', async function (env, subMchId, subAppId) {
 
-        if (env != 'prd-online' && env != 'prd-offline') {
+    if (env != 'online' && env != 'offline') {
         return "env 参数指定了无效值";
     }
-
     let config = cmdEbic[env];
     if (!config) {
         return "指定的环境未有相应的配置";
