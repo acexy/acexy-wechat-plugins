@@ -12,6 +12,7 @@ const WXPaySDK = require('../../utils/lib/wxsdk');
 const xmlJson = require('../../utils/lib/xmlJson');
 
 const cmdEbic = global.config.cmdEbic;
+const logger = require('../../utils/lib/logger');
 
 program.version("1.0.0");
 program.command("ebicPrd bindSubAppid <env> <subMchId> <subAppId>", '为子商户号绑定subAppId \n 例如: ebicPrd bindSubAppid online 3333333 wxwxwxwxx' +
@@ -73,11 +74,11 @@ program.command("ebiPrd addPayUrl <env> <subMchId> <payUrl>", '为子商户号�
 
 const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
-    response = await xmlJson.xml2Json(response);
+    logger.info('请求微信:' + JSON.stringify(reqData) + ' 微信相应: ' + response);
     if (response.xml.return_code == 'SUCCESS' && response.xml.result_code == 'SUCCESS') {
         return '操作成功';
     } else {
-        return '操作失败: ' + !response.xml.err_code_des ? response.xml.return_msg : response.xml.err_code_des;
+        return '操作失败: ' + (!response.xml.err_code_des ? response.xml.return_msg : response.xml.err_code_des);
     }
 }
 
