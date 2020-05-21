@@ -43,7 +43,7 @@ program.command("ebicPrd bindSubAppid <env> <subMchId> <subAppId>", '为子商�
     return await doRequest(wxpay, reqData);
 });
 
-program.command("ebiPrd addPayUrl <env> <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicPrd bindSubAppid online 3333333 https://pay.com/' +
+program.command("ebiPrd addPayUrl <env> <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicPrd addPayUrl online 3333333 https://pay.com/' +
     ' \n 参数说明 \n\t env[执行环境]:  online = 线上环境; offline = 线下环境', async function (env, subMchId, payUrl) {
 
     if (env != 'online' && env != 'offline') {
