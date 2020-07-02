@@ -38,7 +38,7 @@ program.command("ebicTest bindSubAppid <subMchId> <subAppId>", '为子商户号�
     return await doRequest(wxpay, reqData);
 });
 
-program.command("ebicTest addPayUrl <env> <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicTest addPayUrl 3333333 https://pay.com/', async function (subMchId, payUrl) {
+program.command("ebicTest addPayUrl <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicTest addPayUrl 3333333 https://pay.com/', async function (subMchId, payUrl) {
 
     let config = cmdEbic["test"];
     if (!config) {
