@@ -13,7 +13,7 @@ const xmlJson = require('../../utils/lib/xmlJson');
 
 const cmdEbic = global.config.cmdEbic;
 
-program.version("1.0.0");
+program.version("1.0.1");
 program.command("ebicTest bindSubAppid <subMchId> <subAppId>", '为子商户号绑定subAppId \n 例如: ebicTest bindSubAppid 3333333 wxwxwxwxx', async function (subMchId, subAppId) {
 
     let config = cmdEbic['test'];
