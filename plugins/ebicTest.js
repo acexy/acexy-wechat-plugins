@@ -64,6 +64,7 @@ program.command("ebicTest addPayUrl <subMchId> <payUrl>", '为子商户号添加
 
 const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
+    logger.info('请求微信:' + JSON.stringify(reqData) + ' 微信相应: ' + response);
     response = await xmlJson.xml2Json(response);
     if (response.xml.return_code === 'SUCCESS' && response.xml.result_code === 'SUCCESS') {
         return '操作成功';
