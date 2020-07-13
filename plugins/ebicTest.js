@@ -10,6 +10,8 @@ const fs = require('fs');
 const WXPaySDK = require('../../utils/lib/wxsdk');
 
 const xmlJson = require('../../utils/lib/xmlJson');
+const logger = require('../../utils/lib/logger');
+
 
 const cmdEbic = global.config.cmdEbic;
 
