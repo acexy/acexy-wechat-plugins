@@ -35,6 +35,8 @@ program.command("ebicTest bindSubAppid <subMchId> <subAppId>", '为子商户号�
         sub_appid: subAppId,
     }
 
+    console.log(JSON.stringify(reqData));
+
     reqData.sign = WXPaySDK.WXPayUtil.generateSignature(reqData, config.key, WXPaySDK.WXPayConstants.SIGN_TYPE_MD5);
     return await doRequest(wxpay, reqData);
 });
@@ -58,6 +60,8 @@ program.command("ebicTest addPayUrl <subMchId> <payUrl>", '为子商户号添加
         sub_mch_id: subMchId,
         jsapi_path: payUrl,
     }
+
+    console.log(JSON.stringify(reqData));
 
     reqData.sign = WXPaySDK.WXPayUtil.generateSignature(reqData, config.key, WXPaySDK.WXPayConstants.SIGN_TYPE_MD5);
     return await doRequest(wxpay, reqData);
