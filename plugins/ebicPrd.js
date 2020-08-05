@@ -18,7 +18,7 @@ program.version("1.0.0");
 program.command("ebicPrd bindSubAppid <env> <subMchId> <subAppId>", '为子商户号绑定subAppId \n 例如: ebicPrd bindSubAppid online 3333333 wxwxwxwxx' +
     ' \n 参数说明 \n\t env[执行环境]: online = 线上环境; offline = 线下环境', async function (env, subMchId, subAppId) {
 
-    if (env != 'online' && env != 'offline') {
+    if (env !== 'online' && env !== 'offline') {
         return "env 参数指定了无效值";
     }
     let config = cmdEbic[env];
@@ -74,7 +74,7 @@ program.command("ebicPrd addPayUrl <env> <subMchId> <payUrl>", '为子商户号�
 
 const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
-    logger.info('请求微信:' + JSON.stringify(reqData) + ' 微信相应: ' + response);
+    logger.info('请求微信:' + JSON.stringify(reqData) + ' 微信响应: ' + response);
     response = await xmlJson.xml2Json(response);
     if (response.xml.return_code == 'SUCCESS' && response.xml.result_code == 'SUCCESS') {
         return '操作成功';

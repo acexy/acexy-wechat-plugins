@@ -16,8 +16,14 @@ const cmdEbic = global.config.cmdEbic;
 
 program.version("1.0.1");
 program.command("ebicTest bindSubAppid <subMchId> <subAppId>", '为子商户号绑定subAppId \n 例如: ebicTest bindSubAppid 3333333 wxwxwxwxx', async function (subMchId, subAppId) {
+    return await bindSubAppid(subMchId, subAppId, 'test');
+});
+program.command("ebicTest addPayUrl <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicTest addPayUrl 3333333 https://pay.com/', async function (subMchId, payUrl) {
+    return await addPayUrl(subMchId, payUrl, 'test');
+});
 
-    let config = cmdEbic['test'];
+const bindSubAppid = async (subMchId, subAppId, env) => {
+    let config = cmdEbic[env];
     if (!config) {
         return "指定的环境未有相应的配置";
     }
@@ -39,11 +45,9 @@ program.command("ebicTest bindSubAppid <subMchId> <subAppId>", '为子商户号�
 
     reqData.sign = WXPaySDK.WXPayUtil.generateSignature(reqData, config.key, WXPaySDK.WXPayConstants.SIGN_TYPE_MD5);
     return await doRequest(wxpay, reqData);
-});
-
-program.command("ebicTest addPayUrl <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicTest addPayUrl 3333333 https://pay.com/', async function (subMchId, payUrl) {
-
-    let config = cmdEbic["test"];
+}
+const addPayUrl = async (subMchId, payUrl, env) => {
+    let config = cmdEbic[env];
     if (!config) {
         return "指定的环境未有相应的配置";
     }
@@ -65,8 +69,7 @@ program.command("ebicTest addPayUrl <subMchId> <payUrl>", '为子商户号添加
 
     reqData.sign = WXPaySDK.WXPayUtil.generateSignature(reqData, config.key, WXPaySDK.WXPayConstants.SIGN_TYPE_MD5);
     return await doRequest(wxpay, reqData);
-});
-
+}
 const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
     response = await xmlJson.xml2Json(response);
