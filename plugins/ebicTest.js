@@ -83,7 +83,7 @@ const doRequest = async (wxpay, reqData) => {
     if (response.xml.return_code === 'SUCCESS' && response.xml.result_code === 'SUCCESS') {
         return '操作成功';
     } else {
-        return '操作失败: ' + (!response.xml.err_code_des ? response.xml.return_msg : response.xml.err_code_des) +'\n当前使用的 mchId=' + reqData.mch_id + '\n\t使用 ebicTest --help 以获取帮助信息';
+        return '操作失败: ' + (!response.xml.err_code_des ? response.xml.return_msg : response.xml.err_code_des) +'\n\n当前使用的 mchId=' + reqData.mch_id + '\n使用 ebicTest --help 以获取帮助信息';
     }
 }
 
