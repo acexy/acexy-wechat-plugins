@@ -32,7 +32,12 @@ program.command("ebicTest addPayUrlNew <subMchId> <payUrl>", '为子商户号添
     return await addPayUrl(subMchId, payUrl, 'testnew');
 });
 
-const getConfig = config => {
+const bindSubAppid = async (subMchId, subAppId, env) => {
+    let config = cmdEbic[env];
+    if (!config) {
+        return "指定的环境未有相应的配置";
+    }
+
     let wxpay = new WXPaySDK.WXPay({
         appId: config.appId,
         mchId: config.mchId,
@@ -45,21 +50,6 @@ const getConfig = config => {
         sub_mch_id: subMchId,
         sub_appid: subAppId,
     }
-    return {
-        wxpay: wxpay,
-        reqData: reqData
-    }
-}
-
-const bindSubAppid = async (subMchId, subAppId, env) => {
-    let config = cmdEbic[env];
-    if (!config) {
-        return "指定的环境未有相应的配置";
-    }
-
-    let data = getConfig(config);
-    let wxpay = data.wxpay;
-    let reqData = data.reqData;
 
     reqData.sign = WXPaySDK.WXPayUtil.generateSignature(reqData, config.key, WXPaySDK.WXPayConstants.SIGN_TYPE_MD5);
     return await doRequest(wxpay, reqData);
@@ -71,14 +61,22 @@ const addPayUrl = async (subMchId, payUrl, env) => {
         return "指定的环境未有相应的配置";
     }
 
-    let data = getConfig(config);
-    let wxpay = data.wxpay;
-    let reqData = data.reqData;
+    let wxpay = new WXPaySDK.WXPay({
+        appId: config.appId,
+        mchId: config.mchId,
+        certFileContent: fs.readFileSync(config.certFilePath)
+    });
+
+    let reqData = {
+        appid: config.appId,
+        mch_id: config.mchId,
+        sub_mch_id: subMchId,
+        jsapi_path: payUrl,
+    }
 
     reqData.sign = WXPaySDK.WXPayUtil.generateSignature(reqData, config.key, WXPaySDK.WXPayConstants.SIGN_TYPE_MD5);
     return await doRequest(wxpay, reqData);
 }
-
 const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
     response = await xmlJson.xml2Json(response);
@@ -86,6 +84,7 @@ const doRequest = async (wxpay, reqData) => {
         return '操作成功';
     } else {
         return '操作失败: ' + (!response.xml.err_code_des ? response.xml.return_msg : response.xml.err_code_des);
+
     }
 }
 
