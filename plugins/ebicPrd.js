@@ -14,11 +14,11 @@ const xmlJson = require('../../utils/lib/xmlJson');
 const cmdEbic = global.config.cmdEbic;
 const logger = require('../../utils/lib/logger');
 
-program.version("1.0.0");
+program.version("1.0.1");
 program.command("ebicPrd bindSubAppid <env> <subMchId> <subAppId>", '为子商户号绑定subAppId \n 例如: ebicPrd bindSubAppid online 3333333 wxwxwxwxx' +
-    ' \n 参数说明 \n\t env[执行环境]: online = 线上环境; offline = 线下环境', async function (env, subMchId, subAppId) {
+    ' \n 参数说明 \n\t env[执行环境]: \n\tonline=线上(1507863201);offline=线下(1507593061);reduction=减免类(1507863181)', async function (env, subMchId, subAppId) {
 
-    if (env !== 'online' && env !== 'offline') {
+    if (env !== 'online' && env !== 'offline' && env !== 'reduction') {
         return "env 参数指定了无效值";
     }
     let config = cmdEbic[env];
@@ -44,9 +44,9 @@ program.command("ebicPrd bindSubAppid <env> <subMchId> <subAppId>", '为子商�
 });
 
 program.command("ebicPrd addPayUrl <env> <subMchId> <payUrl>", '为子商户号添加支付目录 \n 例如: ebicPrd addPayUrl online 3333333 https://pay.com/' +
-    ' \n 参数说明 \n\t env[执行环境]:  online = 线上环境; offline = 线下环境', async function (env, subMchId, payUrl) {
+    ' \n 参数说明 \n\t env[执行环境]: \n\tonline=线上(1507863201);offline=线下(1507593061);reduction=减免类(1507863181)', async function (env, subMchId, payUrl) {
 
-    if (env != 'online' && env != 'offline') {
+    if (env !== 'online' && env !== 'offline' && env !== 'reduction') {
         return "env 参数指定了无效值";
     }
 
@@ -76,7 +76,7 @@ const doRequest = async (wxpay, reqData) => {
     let response = await wxpay.requestWithCert(WXPaySDK.WXPayConstants.DOMAIN + '/secapi/mch/addsubdevconfig', reqData);
     logger.info('请求微信:' + JSON.stringify(reqData) + ' 微信响应: ' + response);
     response = await xmlJson.xml2Json(response);
-    if (response.xml.return_code == 'SUCCESS' && response.xml.result_code == 'SUCCESS') {
+    if (response.xml.return_code === 'SUCCESS' && response.xml.result_code === 'SUCCESS') {
         return '操作成功';
     } else {
         return '操作失败: ' + (!response.xml.err_code_des ? response.xml.return_msg : response.xml.err_code_des);
