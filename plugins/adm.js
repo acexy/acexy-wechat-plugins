@@ -37,7 +37,7 @@ program.command("adm gcodeList", "获取已配置的Google验证码tokenId", asy
     }
     let msg = "";
     for (let i = 0; i <= keys.length; i++) {
-        msg += "tokenId = " + keys[0] + " 描述: " + googleAuthCode[keys[0]].desc
+        msg += "tokenId = " + keys[i] + " 描述: " + googleAuthCode[keys[i]].desc
         if (i < keys.length - 1) {
             msg += "\n";
         }
