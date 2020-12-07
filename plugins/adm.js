@@ -32,14 +32,14 @@ program.command("adm addPriCmd <cmd> <openId> <remark>", "为openId设置命令�
 
 program.command("adm gcodeList", "获取已配置的Google验证码tokenId", async function () {
     let keys = Object.keys(googleAuthCode);
-    if (keys == null || keys.length == 0) {
+    if (keys == null || keys.length === 0) {
         return "暂未配置任何Google验证码";
     }
     let msg = "";
     for (let i = 0; i <= keys.length; i++) {
         msg += "tokenId = " + keys[0] + " 描述: " + googleAuthCode[keys[0]].desc
         if (i < keys.length - 1) {
-            msg += "/n";
+            msg += "\n";
         }
     }
     return msg;
