@@ -6,7 +6,7 @@
 const commandBuilder = require('../lib/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
 const program = new commandBuilder();
-const notp = require('notp');
+const totp = require('totp-generator');
 
 const SQL = global.config.sql;
 const googleAuthCode = global.config.googleAuthCode;
@@ -30,7 +30,7 @@ program.command("adm addPriCmd <cmd> <openId> <remark>", "为openId设置命令�
     return "命令设置失败 " + cmd;
 });
 
-program.command("adm gcodeList <tokenId>", "获取已配置的Google验证码tokenId", async function () {
+program.command("adm gcodeList", "获取已配置的Google验证码tokenId", async function () {
     let keys = Object.keys(googleAuthCode);
     if (keys == null || keys.length == 0) {
         return "暂未配置任何Google验证码";
@@ -54,7 +54,7 @@ program.command("adm gcode <tokenId>", "获取Google算法产生的验证码", a
     if (!auth) {
         return "无效的tokenId";
     }
-    return notp.totp.gen(auth.token, {});
+    return totp(auth.token);
 });
 
 
