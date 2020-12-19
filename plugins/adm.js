@@ -30,22 +30,6 @@ program.command("adm addPriCmd <cmd> <openId> <remark>", "为openId设置命令�
     return "命令设置失败 " + cmd;
 });
 
-program.command("adm gcodeList", "获取已配置的Google验证码tokenId", async function () {
-    let keys = Object.keys(googleAuthCode);
-    if (keys == null || keys.length === 0) {
-        return "暂未配置任何Google验证码";
-    }
-    let msg = "";
-    for (let i = 0; i < keys.length; i++) {
-        msg += keys[i] + " : " + googleAuthCode[keys[i]].desc;
-        if (i < keys.length - 1) {
-            msg += "\n";
-        }
-    }
-    return msg;
-});
-
-
 /**
  * 模糊查询自己创建的关键字信息
  */
