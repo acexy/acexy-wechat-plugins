@@ -26,6 +26,7 @@ program.command("gcode set <secretCode> <remark>", "设置GoogleCode令牌", asy
     } else {
         maxNo = response.data[0].max_no + 1;
     }
+
     if (remark.length > 10) {
         return "备注信息过长";
     }
@@ -38,7 +39,7 @@ program.command("gcode set <secretCode> <remark>", "设置GoogleCode令牌", asy
 
 });
 
-program.command("gcode list", "获取以设置的GoogleCode配置", async function (openId) {
+program.command("gcode list", "获取已设置的GoogleCode配置", async function (openId) {
     let response = await mysqlPool.exec(SQL.gcodeFindConfig, [openId]);
     if (response.flag) {
         let list = response.data;
@@ -49,7 +50,7 @@ program.command("gcode list", "获取以设置的GoogleCode配置", async functi
         for (let index in list) {
             content += "令牌编号 : " + list[index].secret_no + " 备注: " + list[index].remark + "\n";
         }
-        content += '\n使用 gcode get 令牌编号 获取验证码';
+        content += '\n使用 gcode get <令牌编号> 获取验证码';
         return content;
     } else {
         return '查询配置失败';
@@ -65,7 +66,7 @@ program.command("gcode get <secretNo>", "获取Google算法产生的验证码", 
         return "处理失败请重试";
     }
     if (!response.data[0] || !response.data[0].secret_no) {
-        return '无效的secretNo 可通过 gcode list 查询以配置Google令牌'
+        return '无效的令牌编号 \n可通过 gcode list 查询已配置Google令牌'
     }
     return totp(response.data[0].secret_no);
 });
