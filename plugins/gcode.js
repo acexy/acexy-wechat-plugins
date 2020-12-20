@@ -68,7 +68,7 @@ program.command("gcode get <secretNo>", "获取Google算法产生的验证码", 
     if (!response.data[0] || !response.data[0].secret_no) {
         return '无效的令牌编号 \n可通过 gcode list 查询已配置Google令牌'
     }
-    return totp(response.data[0].secret_no);
+    return totp(response.data[0].secret_code);
 });
 
 
