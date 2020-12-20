@@ -61,7 +61,7 @@ program.command("gcode list", "获取已设置的GoogleCode配置", async functi
  * 模糊查询自己创建的关键字信息
  */
 program.command("gcode get <secretNo>", "获取Google算法产生的验证码", async function (secretNo, openId) {
-    let response = await mysqlPool.exec(SQL.gcodeFindSecretNo, [openId,secretNo]);
+    let response = await mysqlPool.exec(SQL.gcodeFindSecretCode, [openId, secretNo]);
     if (!response.flag) {
         return "处理失败请重试";
     }
