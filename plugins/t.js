@@ -51,7 +51,7 @@ program.command("t <content>", "使用Google翻译引擎翻译指定内容 例�
         let target = obj[0][0][0];
         if (flag) {
             let sl = obj[2];
-            if (sl == tl) { // 含有中文类型输入，最后语言分析得出输入为中文，则需要转为英文
+            if (sl === tl) { // 含有中文类型输入，最后语言分析得出输入为中文，则需要转为英文
                 // 输入的是中文
                 uri = util.format(googleApiUrl, "en", tk, content);
                 requestParam = {
