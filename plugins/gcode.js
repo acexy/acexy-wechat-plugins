@@ -9,7 +9,6 @@ const program = new commandBuilder();
 const totp = require('totp-generator');
 
 const SQL = global.config.sql;
-const googleAuthCode = global.config.googleAuthCode;
 
 /**
  * 模糊查询自己创建的关键字信息
