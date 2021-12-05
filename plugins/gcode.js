@@ -3,9 +3,9 @@
  * 20/12/19
  * @Description:
  */
-const commandBuilder = require('../lib/commandBuilder');
+const COMMAND_BUILDER = require('../lib/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
-const program = new commandBuilder();
+const program = new COMMAND_BUILDER();
 const totp = require('totp-generator');
 
 const SQL = global.config.sql;
@@ -13,32 +13,30 @@ const SQL = global.config.sql;
 /**
  * 模糊查询自己创建的关键字信息
  */
-program.command("gcode set <secretCode> <remark>", "设置GoogleCode令牌", async function (secretCode, remark, openId) {
+program.command("gcode set <secretCode> <remark>", "设置新的GoogleCode令牌", async function (secretCode, remark, openId) {
     let response = await mysqlPool.exec(SQL.gcodeMaxSecretNo, [openId]);
     if (!response.flag) {
         return "处理失败请重试";
     }
-
     let maxNo
     if (!response.data[0].max_no) {
         maxNo = 1;
     } else {
         maxNo = response.data[0].max_no + 1;
     }
-
     if (remark.length > 10) {
         return "备注信息过长";
     }
 
     response = await mysqlPool.exec(SQL.gcodeSetSecretConfig, [openId, maxNo, secretCode, remark]);
     if (response.flag) {
-        return '成功设置令牌 可通过 gcode get ' + maxNo + ' 获取令牌验证码 \n\n请注意删除包含gcode set的消息以便保护secretCode';
+        return '成功设置令牌 可通过 gcode get ' + maxNo + ' 获取令牌验证码 \n\n请注意删除这条信息，以便保护你的secretCode！';
     }
     return "处理失败请重试";
 
 });
 
-program.command("gcode list", "获取已设置的GoogleCode配置", async function (openId) {
+program.command("gcode list", "获取已设置的GoogleCode配置清单", async function (openId) {
     let response = await mysqlPool.exec(SQL.gcodeFindConfig, [openId]);
     if (response.flag) {
         let list = response.data;
