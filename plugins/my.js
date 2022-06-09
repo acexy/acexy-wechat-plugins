@@ -2,7 +2,7 @@
  * 处理个人化的一些命令
  * @type {Command}
  */
-const commandBuilder = require('../lib/commandBuilder');
+const commandBuilder = require('../../utils/basic/commandBuilder');
 const program = new commandBuilder();
 
 program.command("my openId", "获取你的openId", async function (openId) {

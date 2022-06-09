@@ -3,7 +3,7 @@
  * 18/1/4
  * @Description: 时间相关的处理模块
  */
-const commandBuilder = require('../lib/commandBuilder');
+const commandBuilder = require('../../utils/basic/commandBuilder');
 const program = new commandBuilder();
 
 /**

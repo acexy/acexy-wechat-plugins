@@ -3,8 +3,8 @@
  * 2018/1/5
  * @Description:
  */
-const COMMAND_BUILDER = require('../lib/commandBuilder');
-const program = new COMMAND_BUILDER();
+const commandBuilder = require('../../utils/basic/commandBuilder');
+const program = new commandBuilder();
 
 const md5 = require('md5');
 

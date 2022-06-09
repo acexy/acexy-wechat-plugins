@@ -4,7 +4,7 @@
  * @Description: 百度翻译api
  */
 
-const commandBuilder = require('../lib/commandBuilder');
+const commandBuilder = require('../../utils/basic/commandBuilder');
 const program = new commandBuilder();
 
 const httpRequest = require('../lib/httpRequest');

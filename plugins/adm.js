@@ -3,7 +3,7 @@
  * 18/1/8
  * @Description:
  */
-const commandBuilder = require('../lib/commandBuilder');
+const commandBuilder = require('../../utils/basic/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
 const program = new commandBuilder();
 const SQL = global.config.sql;

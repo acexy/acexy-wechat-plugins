@@ -3,9 +3,9 @@
  * 20/12/19
  * @Description:
  */
-const COMMAND_BUILDER = require('../lib/commandBuilder');
+const commandBuilder = require('../../utils/basic/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
-const program = new COMMAND_BUILDER();
+const program = new commandBuilder();
 const totp = require('totp-generator');
 
 const SQL = global.config.sql;
