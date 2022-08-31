@@ -24,13 +24,13 @@ program.command("gcode set <secretCode> <remark>", "设置新的GoogleCode令牌
     } else {
         maxNo = response.data[0].max_no + 1;
     }
-    if (remark.length > 10) {
+    if (remark.length > 30) {
         return "备注信息过长";
     }
 
     response = await mysqlPool.exec(SQL.gcodeSetSecretConfig, [openId, maxNo, secretCode, remark]);
     if (response.flag) {
-        return '成功设置令牌 可通过 gcode get ' + maxNo + ' 获取令牌验证码 \n\n请注意删除这条信息，以便保护你的secretCode！';
+        return '成功设置令牌 可通过 gcode get ' + maxNo + ' 获取令牌验证码 \n\n请注意删除设置时发送的信息，以便保护你的secretCode！';
     }
     return "处理失败请重试";
 
