@@ -30,7 +30,7 @@ program.command("gcode set <secretCode> <remark>", "设置新的GoogleCode令牌
 
     response = await mysqlPool.exec(SQL.gcodeSetSecretConfig, [openId, maxNo, secretCode, remark]);
     if (response.flag) {
-        return '成功设置令牌 可通过 gcode get ' + maxNo + ' 获取令牌验证码 \n\n请注意删除设置时发送的信息，以便保护你的secretCode！';
+        return '成功设置令牌 可通过 gcode get ' + maxNo + ' 获取令牌验证码 \n\n请注意删除上一条设置时发送的信息，以便保护你的secretCode！';
     }
     return "处理失败请重试";
 
