@@ -45,7 +45,7 @@ program.command("gcode list", "获取已设置的GoogleCode配置清单", async 
         }
         let content = '';
         for (let index in list) {
-            content += "令牌编号 : " + list[index].secret_no + " 备注: " + list[index].remark + "\n";
+            content += list[index].secret_no + ": " + list[index].remark + "\n";
         }
         content += '\n使用 gcode get <令牌编号> 获取验证码';
         return content;
