@@ -10,7 +10,7 @@ const program = new commandBuilder();
 const SQL = global.config.sql;
 
 // 添加交易记录
-program.command("tx <fs> <ts> <fm> <tm> <v>", "添加交易记录 例如: tx b e 1 2 100", async function (fs, ts, fm, tm, v) {
+program.command("tx i <fs> <ts> <fm> <tm> <v>", "添加交易记录 例如: tx i b e 1 2 100", async function (fs, ts, fm, tm, v) {
     let response = await mysqlPool.exec(SQL.txInsert, [fs.toUpperCase(), ts.toUpperCase(), fm, tm, v]);
     if (response.flag) {
         return "添加成功";
