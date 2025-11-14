@@ -20,9 +20,8 @@ program.command("tx i <fs> <ts> <fm> <tm> <v>", "添加交易记录 例如: tx i
 
 // 添加交易记录
 program.command("tx d <s>", "交易详情统计 例如: tx d b", async function (s) {
-    let response = await mysqlPool.exec(SQL.txDetail, [s.toUpperCase()]);
+    let response = await mysqlPool.exec(SQL.txDetail, [s.toUpperCase(), s.toUpperCase(), s.toUpperCase(), s.toUpperCase()]);
     if (response.flag) {
-        console.log(response)
         return "添加成功";
     }
     return "处理失败";
