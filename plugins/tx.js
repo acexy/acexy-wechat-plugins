@@ -25,7 +25,7 @@ program.command("tx d <s>", "交易详情统计 例如: tx d b", async function 
         if (response.data) {
             let resp = '';
             for (let k in response.fields) {
-                resp += k + ": " + response.fields[k] + '\n';
+                resp += response.fields[k] + ": " + response.data[response.fields[k]] + '\n';
             }
             return resp;
         }
