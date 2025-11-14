@@ -22,9 +22,16 @@ program.command("tx i <fs> <ts> <fm> <tm> <v>", "添加交易记录 例如: tx i
 program.command("tx d <s>", "交易详情统计 例如: tx d b", async function (s) {
     let response = await mysqlPool.exec(SQL.txDetail, [s.toUpperCase(), s.toUpperCase(), s.toUpperCase(), s.toUpperCase()]);
     if (response.flag) {
-        return "添加成功";
+        if (response.data) {
+            let resp = '';
+            for (let k in response.fields) {
+                resp += k + ": " + response.fields[k] + '\n';
+            }
+            return resp;
+        }
+        return "暂无记录";
     }
-    return "处理失败";
+    return "查询异常";
 });
 
 module.exports.exec = async reqData => {
