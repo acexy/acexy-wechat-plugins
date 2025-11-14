@@ -20,12 +20,13 @@ program.command("tx i <fs> <ts> <fm> <tm> <v>", "添加交易记录 例如: tx i
 
 // 添加交易记录
 program.command("tx d <s>", "交易详情统计 例如: tx d b", async function (s) {
-    let response = await mysqlPool.exec(SQL.txDetail, [s.toUpperCase(), s.toUpperCase(), s.toUpperCase(), s.toUpperCase()]);
+    let S =s.toUpperCase()
+    let response = await mysqlPool.exec(SQL.txDetail, [S,S,S,S,S,S]);
     if (response.flag) {
-        if (response.data) {
+        if (response.data && response.data.length > 0) {
             let resp = '';
             for (let k in response.fields) {
-                resp += response.fields[k] + ": " + response.data[response.fields[k]] + '\n';
+                resp += response.fields[k].name + ": " + response.data[0][response.fields[k].name] + '\n';
             }
             return resp;
         }
