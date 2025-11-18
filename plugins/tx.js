@@ -38,10 +38,10 @@ program.command("tx d <s>", "交易详情统计 例如: tx d b", async function 
 // 添加交易记录
 program.command("tx l <s>", "交易记录列表 例如: tx l b", async function (s) {
     let S = s.toUpperCase()
-    let response = await mysqlPool.exec(SQL.txList, [S, S, S]);
+    let response = await mysqlPool.exec(SQL.txList, [S, S, S, S, S]);
     if (response.flag) {
         if (response.data && response.data.length > 0) {
-            let resp = '创建时间    方向  价值  数量  均价\n';
+            let resp = '方向  价值  数量  均价\n';
             for (let i = 0; i < response.data.length; i++) {
                 let row = response.data[i];
                 let str = '';
