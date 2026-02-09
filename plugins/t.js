@@ -1,5 +1,5 @@
 /**
- * @Author:acexy@thankjava.com
+ * @Author:acexy@acexy.cn
  * 17/12/26
  * @Description: 百度翻译api
  */

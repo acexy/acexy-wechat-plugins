@@ -1,7 +1,7 @@
 /**
  * @Author:acexy@thankjava.com
  * 18/1/8
- * @Description:
+ * @Description: tx数据
  */
 const commandBuilder = require('../../utils/basic/commandBuilder');
 const mysqlPool = require('../lib/mysqlDriver');
